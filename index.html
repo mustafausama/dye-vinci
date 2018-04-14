@@ -7,10 +7,20 @@
     <title>Dye-Vinci</title>
 </head>
 <body>
-    
+    <div>
+        <p id='machine-status' style="color: red">Disconnected</p>
+    </div>
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
-        var io = io()
+        var io = io(window.location.pathname == '/machine' ? '/machine' : '/manager');
+        io.on('machine-connected', function(data) {
+            document.getElementById('machine-status').style.color = '#0f0';
+            document.getElementById('machine-status').innerText = 'Connected';
+        });
+        io.on('machine-disconnected', function(data) {
+            document.getElementById('machine-status').style.color = '#f00';
+            document.getElementById('machine-status').innerText = 'Disconnected';
+        });
     </script>
 </body>
 </html>
