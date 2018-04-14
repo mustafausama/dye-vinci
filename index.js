@@ -9,10 +9,17 @@ var server = app()
     .listen(PORT, () => console.log("listening on port", PORT));
 
 var io = require("socket.io")(server);
+var machineIo = io.of('/machine');
+var managerIo = io.of('/manager');
 
-io.on("connection", function(socket) {
+machineIo.on('connection', function(machine) {
 
-    socket.on('disconnect', function() {
-        console.log("Hello Disconnection");
-    });
+    setTimeInterval((
+        
+        managerIo.sockets.emit('machine-connected'));
+
+});
+
+managerIo.on('connection', function() {
+    
 });
