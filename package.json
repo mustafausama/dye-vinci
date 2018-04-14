@@ -1,0 +1,27 @@
+{
+  "name": "dye-vinci",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mustafausama/dye-vinci.git"
+  },
+  "author": {
+    "name": "Mustafa Usama",
+    "email": "mustafausama@outlook.com",
+    "url": "https://www.linkedin.com/in/mustafa-usama/"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mustafausama/dye-vinci/issues"
+  },
+  "homepage": "https://github.com/mustafausama/dye-vinci#readme",
+  "dependencies": {
+    "socket.io": "2.1.0",
+    "express": "4.16.3"
+  }
+}
