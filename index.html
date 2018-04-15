@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="machine">
-        <h1 class="machine-status">Machine: <span class='status con'>Connected (Virtual)</span></h1>
+        <h1 class="machine-status">Machine: <span class='status dis'>Disconnected (Virtual)</span></h1>
         <section class="control">
             <div class="RGB">
                 <div>
@@ -34,6 +34,14 @@
                 <label style="color: #00f">B</label>
                 <p class="RYB-B">0</p>
             </div>
+            <div class="control-machine">
+                <h2>Control Machine</h2>
+                <div class="machine-btn">
+                    <button>Textile In</button><button>Stop</button>
+                    <button>Belt</button><button>Stop</button>
+                    <button>Textile Out</button><button>Stop</button>
+                </div>
+            </div>  
         </section>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript"></script>
@@ -104,10 +112,12 @@
         var io = io(window.location.pathname == '/machine' ? '/machine' : '/manager');
         io.on('machine-connected', function(data) {
             $('.status').text('Connected').addClass('con').removeClass('dis');
+            $('.control').slideDown();
             
         });
         io.on('machine-disconnected', function(data) {
             $('.status').text('Disonnected').addClass('dis').removeClass('con');
+            $('.control').slideUp();
         });
     </script>
 </body>
