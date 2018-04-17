@@ -48,7 +48,7 @@
                 <label style="color: #00f">B</label>
                 <p class="RYB-B">0</p>
 
-                <p class="amounts">Amounts</p>
+                <ul class="amounts">Amounts</ul>
             </div>
             <div class="control-machine">
                 <h2>Control Machine</h2>
@@ -56,6 +56,11 @@
                     <button onclick="io.emit('textile-in')">Textile In</button><button onclick="io.emit('stop-textile-in')">Stop</button>
                     <button onclick="io.emit('belt')">Belt</button><button onclick="io.emit('stop-belt')">Stop</button>
                     <button onclick="io.emit('textile-out')">Textile Out</button><button onclick="io.emit('stop-textile-out')">Stop</button>
+                    <br>
+                    <br>
+                    <input type="range" min="0" max="10" value="0" oninput="io.emit('textile-in', this.value)">
+                    <input type="range" min="0" max="10" value="0" oninput="io.emit('belt', this.value)">
+                    <input type="range" min="0" max="10" value="0" oninput="io.emit('textile-out', this.value)">
                 </div>
             </div>  
         </section>
@@ -139,11 +144,14 @@
                         fixative = 155 * liters;
                     break;
                 }
-            $('.amounts').text(
-                `Red Powder: ${Math.round(iRed / sum * 20) * liters}g - `+
-                `Yellow Powder: ${Math.round(iYellow / sum * 20) * liters}g - `+
-                `Blue Powder: ${Math.round(iBlue / sum * 20) * liters}g - `+
-                `Fixative ${fixative}`
+                var R = iRed > 0 ? Math.round(iRed / sum * 20) * liters : 0;
+                var Y = iYellow > 0 ? Math.round(iYellow / sum * 20) * liters : 0;
+                var B = iBlue > 0 ? Math.round(iBlue / sum * 20) * liters : 0;
+            $('.amounts').html(
+                `<li>Red Powder: ${R}g</li>`+
+                `<li>Yellow Powder: ${Y}g</li>`+
+                `<li>Blue Powder: ${B}g</li>`+
+                `<li>Fixative ${fixative}g</li>`
                 
             );
 
@@ -152,7 +160,7 @@
         var io = io(window.location.pathname == '/machine' ? '/machine' : '/manager');
         io.on('machine-connected', function(data) {
             $('.status').text('Connected').addClass('con').removeClass('dis');
-            $('.control').slideDown();            
+            $('.control').slideDown(); 
         });
         io.on('machine-disconnected', function(data) {
             $('.status').text('Disonnected').addClass('dis').removeClass('con');
