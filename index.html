@@ -37,9 +37,9 @@
             <div class="control-machine">
                 <h2>Control Machine</h2>
                 <div class="machine-btn">
-                    <button onclick="io.emit('textile-in')">Textile In</button><button onclick="io.emit('stop-textile-in')">Stop</button>
-                    <button onclick="io.emit('belt')">Belt</button><button onclick="io.emit('stop-belt')">Stop</button>
-                    <button onclick="io.emit('textile-out')">Textile Out</button><button onclick="io.emit('stop-textile-out')">Stop</button>
+                    <button onclick="setTimeout(() => {io.emit('textile-in')}, 500);">Textile In</button><button onclick="setTimeout(() => {io.emit('stop-textile-in')}, 500);">Stop</button>
+                    <button onclick="setTimeout(() => {io.emit('belt')}, 500);">Belt</button><button onclick="setTimeout(() => {io.emit('stop-belt')}, 500);">Stop</button>
+                    <button onclick="setTimeout(() => {io.emit('textile-out')}, 500);">Textile Out</button><button onclick="setTimeout(() => {io.emit('stop-textile-out')}, 500);">Stop</button>
                 </div>
             </div>  
         </section>
@@ -54,7 +54,7 @@
             $('.color-wheel').css({
                 "background-color": 'rgb('+iRed+', '+iGreen+', '+iBlue+')'
             });
-
+            setTimeout();
             // Remove the white from the color
             var iWhite = Math.min(iRed, iGreen, iBlue);
             
