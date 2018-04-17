@@ -37,9 +37,9 @@
             <div class="control-machine">
                 <h2>Control Machine</h2>
                 <div class="machine-btn">
-                    <button>Textile In</button><button>Stop</button>
-                    <button>Belt</button><button>Stop</button>
-                    <button>Textile Out</button><button>Stop</button>
+                    <button onclick="io.emit('textile-in')">Textile In</button><button onclick="io.emit('stop-textile-in')">Stop</button>
+                    <button onclick="io.emit('belt')">Belt</button><button onclick="io.emit('stop-belt')">Stop</button>
+                    <button onclick="io.emit('textile-out')">Textile Out</button><button onclick="io.emit('stop-textile-out')">Stop</button>
                 </div>
             </div>  
         </section>
