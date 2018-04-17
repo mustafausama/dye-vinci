@@ -15,6 +15,9 @@ server.listen(PORT);
 app.get('/style.css', function(req, res) {
     res.sendFile(__dirname + "/" + "style.css");
 })
+app.get('/jquery.min.js', function(req, res) {
+    res.sendFile(__dirname + "/" + "jquery.min.js");
+})
 
 app.use((req, res) => res.sendFile(INDEX));
 

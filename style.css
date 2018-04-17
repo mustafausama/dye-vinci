@@ -5,8 +5,9 @@
 body, html {
     font-family: Arial, Helvetica, sans-serif;
     overflow: hidden;
-    background-color: black;
-    color: #fff
+    color: #fff;
+    background-color: #000;
+    height: 100%;
 }
 
 .machine-status {
@@ -39,11 +40,75 @@ body, html {
     /*display: none;*/
 }
 
+.control .input-materials {
+    height: 80px;
+    width: 400px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.control .input-materials > div {
+    display: inline-block;
+    margin: 10px 20px;
+}
+
+.control .textile {
+    background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+    height: 35px;
+    overflow: hidden;
+    width: 240px;
+    color: #fff;
+    border: 1px dashed #ccc;
+    position: relative;
+    float: left;
+}
+
+.control .textile select {
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    height: 29px;
+    padding: 5px;
+    width: 268px;
+    color: #fff;
+    font-size: em;
+
+}
+.control .liters {
+    position: relative;
+    width: 80px;
+    margin: auto;
+    float: left;
+}
+
+.control .input-weight {
+    padding: 10px 20px 10px 10px;
+    border: none;
+    background: transparent;
+    border-bottom: 1px solid rgba(245, 245, 245, 0.3);
+    width: 80px;
+    text-align: center;
+    align-content: center;
+    font-size: 1.2em;
+    font-weight: bolder;
+    outline: none;
+    color: rgb(150, 150, 150)
+}
+
+.control .input-weight ~ label {
+    font-weight: bolder;
+    position: absolute;
+    top: 10px;
+    right: 1px;
+    font-size: 1.3em;
+    color: rgb(150, 150, 150)
+}
+
 .control .RGB input {
     padding: 10px 10px 10px 20px;
     border: none;
     background: transparent;
-    border-bottom: 1px solid rgb(211, 211, 211);
+    border-bottom: 1px solid rgba(245, 245, 245, 0.3);
     width: 80px;
     text-align: center;
     align-content: center;
@@ -64,7 +129,6 @@ body, html {
     left: 0px;
     font-size: 1.2em;
     font-weight: bolder;
-    transition: all 0.5s ease-in-out;
     cursor: text;
 }
 
@@ -76,7 +140,7 @@ body, html {
     margin: 0 auto;
     background-color: #000;
     margin-left: 10px;
-    transition: all 0.5s ease;
+    transition: all 1s ease;
     margin: auto;
     border: 3px solid #fff;
 }
@@ -88,7 +152,7 @@ body, html {
 
 }
 
-.control .RYB p {
+.control .RYB p:not(.amounts) {
     display: inline-block;
     margin-right: 35px;
     margin-left: 5px;

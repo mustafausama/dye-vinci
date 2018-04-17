@@ -11,6 +11,20 @@
     <div class="machine">
         <h1 class="machine-status">Machine: <span class='status dis'>Disconnected (Virtual)</span></h1>
         <section class="control">
+            <div class="input-materials">
+                <div class="textile">
+                    <select class="textile-type">
+                        <option value="cotton">Cotton</option>
+                        <option value="linen">Linen</option>
+                        <option value="jeans">Jeans</option>
+                    </select>
+                </div>
+                <div class="liters">
+                    <input class="input-weight" value="0">
+                    <label>L</label>
+                </div>
+            </div>
+            
             <div class="RGB">
                 <div>
                     <input style="color: #f00" maxlength="3" class="Rcom" value="0">
@@ -33,6 +47,8 @@
                 <p class="RYB-Y">0</p>
                 <label style="color: #00f">B</label>
                 <p class="RYB-B">0</p>
+
+                <p class="amounts">Amounts</p>
             </div>
             <div class="control-machine">
                 <h2>Control Machine</h2>
@@ -44,10 +60,10 @@
             </div>  
         </section>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script src="./jquery.min.js" type="text/javascript"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
-        $('input').keyup(function() {
+        var calculations = function() {
             var iRed = ($('.Rcom').val() >= 0 && $('.Rcom').val() <= 255) ? $('.Rcom').val() : 0;
             var iGreen = ($('.Gcom').val() >= 0 && $('.Gcom').val() <= 255) ? $('.Gcom').val() : 0;
             var iBlue = ($('.Bcom').val() >= 0 && $('.Bcom').val() <= 255) ? $('.Bcom').val() : 0;
@@ -108,12 +124,35 @@
             $('.RYB-Y').text(iYellow);
             $('.RYB-B').text(iBlue);
 
-        });
+            var liters = $('.input-weight').val(),
+                sum = (iRed > 0 ? 255 : 0) + (iYellow > 0 ? 255 : 0) + (iBlue > 0 ? 255 : 0),
+                fixative = 0;
+            if(sum > 0)
+                switch($('.textile-type').val()) {
+                    case 'cotton':
+                        fixative = 120 * liters;
+                    break;
+                    case 'linen':
+                        fixative = 135 * liters;
+                    break;
+                    case 'jeans':
+                        fixative = 155 * liters;
+                    break;
+                }
+            $('.amounts').text(
+                `Red Powder: ${Math.round(iRed / sum * 20) * liters}g - `+
+                `Yellow Powder: ${Math.round(iYellow / sum * 20) * liters}g - `+
+                `Blue Powder: ${Math.round(iBlue / sum * 20) * liters}g - `+
+                `Fixative ${fixative}`
+                
+            );
+
+        };
+        $('input, .input-weight').keyup(calculations);
         var io = io(window.location.pathname == '/machine' ? '/machine' : '/manager');
         io.on('machine-connected', function(data) {
             $('.status').text('Connected').addClass('con').removeClass('dis');
-            $('.control').slideDown();
-            
+            $('.control').slideDown();            
         });
         io.on('machine-disconnected', function(data) {
             $('.status').text('Disonnected').addClass('dis').removeClass('con');
