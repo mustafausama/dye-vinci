@@ -48,19 +48,34 @@
                 <label style="color: #00f">B</label>
                 <p class="RYB-B">0</p>
 
-                <ul class="amounts">Amounts</ul>
+                <ul class="amounts">
+                    <li>Red Powder: 0g</li>
+                    <li>Yellow Powder: 0g</li>
+                    <li>Blue Powder: 0g</li>
+                    <li>Fixative: 0g</li>
+                </ul>
             </div>
             <div class="control-machine">
                 <h2>Control Machine</h2>
                 <div class="machine-btn">
-                    <button onclick="io.emit('textile-in')">Textile In</button><button onclick="io.emit('stop-textile-in')">Stop</button>
-                    <button onclick="io.emit('belt')">Belt</button><button onclick="io.emit('stop-belt')">Stop</button>
-                    <button onclick="io.emit('textile-out')">Textile Out</button><button onclick="io.emit('stop-textile-out')">Stop</button>
-                    <br>
-                    <br>
+                    <button onclick="io.emit('textile-in', 10)">Textile In</button><button onclick="io.emit('textile-in', 0)">Stop</button>
                     <input type="range" min="0" max="10" value="0" oninput="io.emit('textile-in', this.value)">
-                    <input type="range" min="0" max="10" value="0" oninput="io.emit('belt', this.value)">
+                    <p></p>
+                    <button onclick="io.emit('top-belt', 10)">Top Belt</button><button onclick="io.emit('top-belt', 0)">Stop</button>
+                    <input type="range" min="0" max="10" value="0" oninput="io.emit('top-belt', this.value)">
+                    <p></p>
+                    <button onclick="io.emit('down-belt', 10)">Down Belt</button><button onclick="io.emit('down-belt', 0)">Stop</button>
+                    <input type="range" min="0" max="10" value="0" oninput="io.emit('down-belt', this.value)">
+                    <p></p>
+                    <button onclick="io.emit('belt-up')">Belt Up</button><button onclick="io.emit('belt-up')">Stop</button>
+                    <input type="range" min="0" max="10" value="0" disabled oninput="">
+                    <p></p>
+                    <button onclick="io.emit('belt-down')">Belt Down</button><button onclick="io.emit('belt-down')">Stop</button>
+                    <input type="range" min="0" max="10" value="0" disabled oninput="">
+                    <p></p>
+                    <button onclick="io.emit('textile-out', 10)">Textile Out</button><button onclick="io.emit('textile-out', 0)">Stop</button>
                     <input type="range" min="0" max="10" value="0" oninput="io.emit('textile-out', this.value)">
+
                 </div>
             </div>  
         </section>
@@ -151,12 +166,13 @@
                 `<li>Red Powder: ${R}g</li>`+
                 `<li>Yellow Powder: ${Y}g</li>`+
                 `<li>Blue Powder: ${B}g</li>`+
-                `<li>Fixative ${fixative}g</li>`
+                `<li>Fixative: ${fixative}g</li>`
                 
             );
 
         };
         $('input, .input-weight').keyup(calculations);
+        $('.textile-type').change(calculations);
         var io = io(window.location.pathname == '/machine' ? '/machine' : '/manager');
         io.on('machine-connected', function(data) {
             $('.status').text('Connected').addClass('con').removeClass('dis');

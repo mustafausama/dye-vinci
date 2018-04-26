@@ -32,8 +32,12 @@ io.of('/manager').on('connection', function(socket) {
         });
         
         // Recieving controls from the manaer client
-        socket.on('textile-in', (data) => {machine.emit('textile-in', data)});
-        socket.on('belt', (data) => {machine.emit('belt', data)});
-        socket.on('textile-out', (data) => {machine.emit('textile-out', data)});
+        socket.on('textile-in',  (data) => machine.emit('textile-in', data));
+        socket.on('top-belt',    (data) => machine.emit('top-belt', data));
+        socket.on('down-belt',   (data) => machine.emit('down-belt', data));
+        socket.on('belt-up',     () => machine.emit('belt-up'));
+        socket.on('belt-down',   () => machine.emit('belt-down'));
+        socket.on('textile-out', (data) => machine.emit('textile-out', data));
+
     });
 });
