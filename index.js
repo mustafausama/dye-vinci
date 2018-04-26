@@ -31,7 +31,7 @@ io.of('/manager').on('connection', function(socket) {
             io.of('/manager').emit('machine-disconnected', "machine disconnected");
         });
         
-        // Recieving controls from the manaer client
+        // Recieving controls from the manager client
         socket.on('textile-in',  (data) => machine.emit('textile-in', data));
         socket.on('top-belt',    (data) => machine.emit('top-belt', data));
         socket.on('down-belt',   (data) => machine.emit('down-belt', data));
