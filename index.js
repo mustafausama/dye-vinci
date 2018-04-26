@@ -39,5 +39,7 @@ io.of('/manager').on('connection', function(socket) {
         socket.on('belt-down',   () => machine.emit('belt-down'));
         socket.on('textile-out', (data) => machine.emit('textile-out', data));
 
+        socket.on('colors', (data) => machine.emit('colors', data));
+
     });
 });

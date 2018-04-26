@@ -84,9 +84,11 @@
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
         var calculations = function() {
-            var iRed = ($('.Rcom').val() >= 0 && $('.Rcom').val() <= 255) ? $('.Rcom').val() : 0;
-            var iGreen = ($('.Gcom').val() >= 0 && $('.Gcom').val() <= 255) ? $('.Gcom').val() : 0;
-            var iBlue = ($('.Bcom').val() >= 0 && $('.Bcom').val() <= 255) ? $('.Bcom').val() : 0;
+            var iRed = ($('.Rcom').val() > 0 && $('.Rcom').val() <= 255) ? $('.Rcom').val() : 0;
+            var iGreen = ($('.Gcom').val() > 0 && $('.Gcom').val() <= 255) ? $('.Gcom').val() : 0;
+            var iBlue = ($('.Bcom').val() > 0 && $('.Bcom').val() <= 255) ? $('.Bcom').val() : 0;
+            var colors = {iRed, iGreen, iBlue};
+
             $('.color-wheel').css({
                 "background-color": 'rgb('+iRed+', '+iGreen+', '+iBlue+')'
             });
@@ -167,8 +169,9 @@
                 `<li>Yellow Powder: ${Y}g</li>`+
                 `<li>Blue Powder: ${B}g</li>`+
                 `<li>Fixative: ${fixative}g</li>`
-                
             );
+
+            io.emit('colors', colors);
 
         };
         $('input, .input-weight').keyup(calculations);
